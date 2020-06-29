@@ -3,7 +3,8 @@ package com.epam.izh.rd.online.service;
 import com.epam.izh.rd.online.entity.Author;
 import com.epam.izh.rd.online.entity.SchoolBook;
 import com.epam.izh.rd.online.repository.BookRepository;
-import org.apache.commons.lang3.ArrayUtils;
+
+import static org.apache.commons.lang3.ArrayUtils.isNotEmpty;
 
 public class SimpleSchoolBookService implements BookService<SchoolBook> {
     private BookRepository<SchoolBook> schoolBookBookRepository;
@@ -47,7 +48,7 @@ public class SimpleSchoolBookService implements BookService<SchoolBook> {
 
     @Override
     public Author findAuthorByBookName(String name) {
-        if (ArrayUtils.isNotEmpty(findByName(name))) {
+        if (isNotEmpty(findByName(name))) {
             String authorName = findByName(name)[0].getAuthorName();
             String authorLastName = findByName(name)[0].getAuthorLastName();
             return authorService.findByFullName(authorName, authorLastName);

@@ -1,9 +1,9 @@
 package com.epam.izh.rd.online.repository;
 
 import com.epam.izh.rd.online.entity.Author;
-import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.Arrays;
+import static org.apache.commons.lang3.ArrayUtils.add;
+import static org.apache.commons.lang3.ArrayUtils.removeElement;
 
 public class SimpleAuthorRepository implements AuthorRepository {
     private Author[] authors = new Author[0];
@@ -11,7 +11,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
     @Override
     public boolean save(Author author) {
         if (findByFullName(author.getName(), author.getLastName()) == null) {
-            authors = ArrayUtils.add(authors, author);
+            authors = add(authors, author);
             return true;
         }
         return false;
@@ -31,7 +31,7 @@ public class SimpleAuthorRepository implements AuthorRepository {
     @Override
     public boolean remove(Author author) {
         if (findByFullName(author.getName(), author.getLastName()) != null) {
-            authors = ArrayUtils.removeElement(authors, findByFullName(author.getName(), author.getLastName()));
+            authors = removeElement(authors, findByFullName(author.getName(), author.getLastName()));
             return true;
         }
         return false;
